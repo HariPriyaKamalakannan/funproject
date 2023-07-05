@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Name": "Brand A"
+  },
+  {
+    "Id": 2,
+    "Name": "Brand B"
+  },
+  {
+    "Id": 3,
+    "Name": "Brand C"
+  },
+  {
+    "Id": 4,
+    "Name": "Brand D"
+  },
+  {
+    "Id": 5,
+    "Name": "Brand E"
+  },
+  {
+    "Id": 6,
+    "Name": "Brand F"
+  }
+]
