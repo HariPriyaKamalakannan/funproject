@@ -5,49 +5,15 @@ using Core.Interfaces;
 using API.Middleware;
 using Microsoft.AspNetCore.Mvc;
 using API.Errors;
+using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddApplicationServices(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<StoreContext>(opt =>
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
-builder.Services.AddScoped<IProductRepository,ProductsRepository>();
-builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.Configure<ApiBehaviorOptions>(options=>
-{
-    options.InvalidModelStateResponseFactory=ActionContext=>
-    {
-        var error=ActionContext.ModelState
-        .Where(e=>e.Value.Errors.Count > 0)
-        .SelectMany(x=>x.Value.Errors)
-        .Select(x=>x.ErrorMessage).ToArray();
-
-        var errorResponse=new APIValidationErrorResponse
-        {
-            Errors=error
-            
-        };
-        return new BadRequestObjectResult(errorResponse);
-    };
-});
-
-builder.Services.AddCors(opt=>
-{
-    opt.AddPolicy("CorsPolicy",policy =>
-    {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
-    } );
-});
 
 var app = builder.Build();
 
