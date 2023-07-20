@@ -8,7 +8,7 @@ import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
 import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { HomeModule } from './home/home.module';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,   
-    HomeModule
+    HomeModule,ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

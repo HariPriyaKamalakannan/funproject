@@ -1,0 +1,28 @@
+Angular bootstrap documentation :https://valor-software.com/ngx-bootstrap/#/
+
+form bootstrap:https://getbootstrap.com/docs/5.3/getting-started/introduction/
+
+https://material.angular.io/cdk/categories
+ install angular material cdk : > ng add @angular/cdk
+
+ toaster install:
+ >npm install ngx-toastr@13.2.1 --save 
+ npm install --save ngx-toastr@15.2.0
+ ngx-toastr@9.0.2
+
+ docker-compose up -d
+
+
+ >ef migrations remove
+
+ >dotnet ef migrations add "Postgres initial" -p Infrastructure -s API -c StoreContext -o Data/Migrations
+ dotnet ef migrations add "Postgress initial" -p Infrastructure -s API -c AppIdentityDbContext -o Identity/Migrations
+
+ >dotnet watch --no-hot-reload
+
+ dotnet publish -c Release -o publish funproject.sln
+
+ ---drop the database
+ dotnet ef database drop -s API -p Infrastructure -c StoreContext
+
+  dotnet ef database drop -s API -p Infrastructure -c AppIdentityDbContexty

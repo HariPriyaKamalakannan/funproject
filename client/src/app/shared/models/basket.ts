@@ -3,10 +3,10 @@ import * as cuid from 'cuid'
 export interface Basket {
     id: string;
     items: BasketItem[];
-    //deliveryMethodId: any
-   // clientSecret: any
-   // paymentIntentId: any
-    //shippingPrice: number
+    deliveryMethodId: any
+    clientSecret: any
+   paymentIntentId: any
+    shippingPrice: number
   }
   
   export interface BasketItem {
@@ -18,7 +18,6 @@ export interface Basket {
     brand: string;
     type: string;
   }
-
 
   export class Basket implements Basket {
     id = cuid();

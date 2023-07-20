@@ -9,12 +9,13 @@ using API.Extensions;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
-    [Route("[controller]")]
+ 
     public class OrdersController : BaseAPIController
     {
         private readonly IOrderService _orderService;
@@ -33,7 +34,8 @@ namespace API.Controllers
 
             var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
 
-            var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
+            var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, 
+            orderDto.BasketId, address);
 
             if (order == null) return BadRequest(new APIResponse(400, "Problem creating order"));
 

@@ -20,14 +20,8 @@ namespace API.Extensions
        {
             services.AddDbContext<StoreContext>(opt =>
             {
-                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             });
-
-              services.AddDbContext<AppIdentityDbContext>(x =>
-            {
-                x.UseSqlite(config.GetConnectionString("IdentityConnection"));
-            });
-
 
             services.AddSingleton<IConnectionMultiplexer>(c => 
             {
@@ -38,6 +32,7 @@ namespace API.Extensions
             services.AddScoped<IBasketRepository,BasketRepository>();
             services.AddScoped<IProductRepository,ProductsRepository>();
             services.AddScoped<IOrderService,OrderService>();
+            services.AddScoped<IPaymentService,PaymentService>();
             services.AddScoped<ITokenService,TokenService>();
             services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -64,7 +59,8 @@ namespace API.Extensions
             {
                 opt.AddPolicy("CorsPolicy",policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+                    policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                    
                 } );
             });
 
